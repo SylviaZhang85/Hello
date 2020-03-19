@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity  {
         String Cel = inp.getText().toString();
         double c=Double.parseDouble(Cel);
         double Fah= c*1.8 +32;
-        tex4.setText(c+"Celsius is equal to"+Fah+"Fahrenheit");
+        tex4.setText(c+"Celsius is equal to "+Fah+"Fahrenheit");
 
     }
     private void F(){
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity  {
         String Fah = inp.getText().toString();
         double f=Double.parseDouble(Fah);
         double Cel= (f-32)/1.8;
-        tex4.setText(f+" Fahrenheit is equal to"+Cel+"Celsius");
+        tex4.setText(f+" Fahrenheit is equal to "+Cel+"Celsius");
 
     }
 
