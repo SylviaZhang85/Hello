@@ -4,4 +4,11 @@
     <string name="from">WYB\'s wife</string>
     <string name="HELLO">Hello</string>
     <string name="btn_label">button</string>
+    <string name="hint_txt">input your name</string>
+    <string name="teamName">teamName</string>
+    <string name="Score">score</string>
+    <string name="label_add1">+1point</string>
+    <string name="label_add2">+2points</string>
+    <string name="label_add3">+3points</string>
+    <string name="Btn">BUTTON</string>
 </resources>
