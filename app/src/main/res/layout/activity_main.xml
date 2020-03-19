@@ -24,12 +24,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="text" />
 
     <Button
         android:id="@+id/btn1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="btnClick"
         android:text="@string/btn_label" />
 
 </LinearLayout>
