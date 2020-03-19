@@ -2,4 +2,6 @@
     <string name="app_name" translatable="false">My Application</string>
     <string name="str">Happy Birthday</string>
     <string name="from">WYB\'s wife</string>
+    <string name="HELLO">Hello</string>
+    <string name="btn_label">button</string>
 </resources>
