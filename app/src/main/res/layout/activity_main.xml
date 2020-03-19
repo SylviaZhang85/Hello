@@ -10,28 +10,45 @@
 
 
     <TextView
-        android:id="@+id/showText"
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
         android:gravity="center"
-        android:text="@string/HELLO"
-        android:textSize="25sp" />
+        android:textSize="35sp"
+        android:text="@string/temp" />
 
     <EditText
-        android:id="@+id/inpext"
+        android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
         android:hint="@string/hint_txt"
-        android:inputType="text" />
+        android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/btn1"
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="btnClick"
-        android:text="@string/btn_label" />
+        android:layout_marginBottom="20dp"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:onClick="btn1"
+        android:text="@string/Celsius" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/hint_txt"
+        android:onClick="btn2"
+        android:text="@string/Fahrenheit" />
 
 </LinearLayout>

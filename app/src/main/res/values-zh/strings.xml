@@ -2,4 +2,8 @@
 <resources>
     <string name="from">王一博npy</string>
     <string name="str">生日快乐</string>
+    <string name="temp">温度转换</string>
+    <string name="hint_txt">请输入温度</string>
+    <string name="Celsius">摄氏度转华氏度</string>
+    <string name="Fahrenheit">华氏度转摄氏度</string>
 </resources>
