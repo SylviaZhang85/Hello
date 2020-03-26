@@ -12,4 +12,8 @@
     <string name="label_add3">+3points</string>
     <string name="Btn">BUTTON</string>
     <string name="BTNN">RESET</string>
+    <string name="btn_dollar_label">Dollar</string>
+    <string name="btn_euro_label">Euro</string>
+    <string name="btn_won_label">Won</string>
+    <string name="rmb_hint">InputRMB</string>
 </resources>
