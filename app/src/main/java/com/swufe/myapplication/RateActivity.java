@@ -1,6 +1,9 @@
 package com.swufe.myapplication;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,5 +43,15 @@ public class RateActivity extends AppCompatActivity {
             float val=r*500.0f;
             show.setText(val+" ");
         }
+
+
+    }
+
+  public void openOne(View btn){
+    Log.i("open;","openOne;");
+      Intent hello=new Intent(this,SecondActivity.class);
+      Intent web=new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.jd.com"));
+      Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:87092173"));
+      startActivity(intent);
     }
 }

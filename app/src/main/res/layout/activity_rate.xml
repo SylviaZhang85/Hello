@@ -47,5 +47,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_won"
         android:text="@string/btn_won_label"
-        android:onClick="onClick"/>
+        android:onClick="openOne"/>
 </LinearLayout>
