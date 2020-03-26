@@ -38,7 +38,7 @@ public class RateActivity extends AppCompatActivity {
             show.setText(String.valueOf(val));
         }else{
             float val=r*500.0f;
-            show.setText(val+"");
+            show.setText(val+" ");
         }
     }
 }
