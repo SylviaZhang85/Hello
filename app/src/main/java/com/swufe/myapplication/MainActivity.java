@@ -9,43 +9,43 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
+    TextView out;
     EditText inp;
-    TextView tex4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        inp=(EditText)findViewById(R.id.editText);
-        tex4=(TextView)findViewById(R.id.textView4);
-        }
+        out= (TextView)findViewById(R.id.showText);
+        inp=(EditText)findViewById(R.id.inpext);
 
+        Button btn= (Button)findViewById(R.id.btn1);
+        //btn.setOnClickListener(this);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("mail","onClick call......");
+                String str = inp.getText().toString();
 
-
-    public void btn1(View btn){
-      C();
-    }
-    public void btn2(View btn){
-      F();
-    }
-
-    private void C(){
-        Log.i("show","");
-        String Cel = inp.getText().toString();
-        double c=Double.parseDouble(Cel);
-        double Fah= c*1.8 +32;
-        tex4.setText(c+"Celsius is equal to "+Fah+"Fahrenheit");
-
-    }
-    private void F(){
-        Log.i("show","");
-        String Fah = inp.getText().toString();
-        double f=Double.parseDouble(Fah);
-        double Cel= (f-32)/1.8;
-        tex4.setText(f+" Fahrenheit is equal to "+Cel+"Celsius");
-
+                out.setText("Hello "+str);
+            }
+        });
     }
 
+    @Override
+    public void onClick(View v) {
+        Log.i("click","onClick");
+
+        //TextView tv= (TextView)findViewById(R.id.showText);
+
+
+        //EditText inp=(EditText)findViewById(R.id.inpext);
+        String str = inp.getText().toString();
+
+        out.setText("Hello "+str);
+    }
+    public void btnClick(View btn){
+        Log.i("click","btnClick called......");
+    }
 }
