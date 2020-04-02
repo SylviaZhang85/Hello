@@ -1,7 +1,6 @@
 package com.swufe.myapplication;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,12 +8,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class RateActivity extends AppCompatActivity {
     EditText rmb;
     TextView show;
-
+    private final String TAG="Rate";
+    private float dollarRate=0.1f;
+    private float euroRate=0.2f;
+    private float wonRate=0.3f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +36,15 @@ public class RateActivity extends AppCompatActivity {
             Toast.makeText(this,"请输入金额",Toast.LENGTH_SHORT).show();
         }
         if(btn.getId()==R.id.btn_dollar){
-            float val=r*(1/6.7f);
-            show.setText(String.valueOf(val));
+
+            show.setText(String.format("%.2f",r*dollarRate));
         }
         else if(btn.getId()==R.id.btn_euro){
-            float val=r*(1/11.0f);
-            show.setText(String.valueOf(val));
+
+            show.setText(String.format("%.2f",r*euroRate));
         }else{
-            float val=r*500.0f;
-            show.setText(val+" ");
+
+           show.setText(String.format("%.2f",r*wonRate));
         }
 
 
@@ -49,9 +52,36 @@ public class RateActivity extends AppCompatActivity {
 
   public void openOne(View btn){
     Log.i("open;","openOne;");
-      Intent hello=new Intent(this,SecondActivity.class);
-      Intent web=new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.jd.com"));
-      Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:87092173"));
-      startActivity(intent);
+      Intent config= new Intent(this,ConfigActivity.class);
+      config.putExtra("dollar_rate_key",dollarRate);
+      config.putExtra("euro_rate_key",euroRate);
+      config.putExtra("won_rate_key",wonRate);
+
+      Log.i(TAG,"openOne:dollarRate="+dollarRate);
+      Log.i(TAG,"openOne:euroRate="+euroRate);
+      Log.i(TAG,"openOne:wonRate="+wonRate);
+
+      startActivity(config);
+
+      startActivityForResult(config,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==1&&resultCode==2){
+           /* bdl.putFloat("key_dollar",newDollar);
+            bdl.putFloat("key_euro",newDollar);
+            bdl.putFloat("key_won",newDollar);*/
+           Bundle bundle = data.getExtras();
+           dollarRate= bundle.getFloat("key_dollar",0.1f);
+           euroRate= bundle.getFloat("key_euro",0.1f);
+           wonRate= bundle.getFloat("key_won",0.1f);
+
+            Log.i(TAG,"onActivityResult:dollar="+dollarRate);
+            Log.i(TAG,"onActivityResult:euro="+euroRate);
+            Log.i(TAG,"onActivityResult:won="+wonRate);
+
+        }
+        super.onActivityResult(requestCode,resultCode,data);
     }
 }
