@@ -3,6 +3,8 @@ package com.swufe.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -64,6 +66,32 @@ public class RateActivity extends AppCompatActivity {
       startActivity(config);
 
       startActivityForResult(config,1);
+
+    }
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.rate,menu);
+        return true;
+
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId()==R.id.menu_set){
+            openConfig();
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openConfig() {
+        Intent config= new Intent(this, ConfigActivity.class);
+        config.putExtra("dollar_rate_key",dollarRate);
+        config.putExtra("euro_rate_key",euroRate);
+        config.putExtra("won_rate_key",wonRate);
+
+        Log.i(TAG,"openOne:dollarRate="+dollarRate);
+        Log.i(TAG,"openOne:euroRate="+euroRate);
+        Log.i(TAG,"openOne:wonRate="+wonRate);
+
+        startActivityForResult(config,1);
     }
 
     @Override
