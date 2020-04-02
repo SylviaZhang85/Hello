@@ -64,7 +64,6 @@ public class RateActivity extends AppCompatActivity {
       Log.i(TAG,"openOne:wonRate="+wonRate);
 
       startActivity(config);
-
       startActivityForResult(config,1);
 
     }
