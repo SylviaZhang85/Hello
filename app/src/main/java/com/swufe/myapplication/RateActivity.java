@@ -1,6 +1,8 @@
 package com.swufe.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,9 +19,9 @@ public class RateActivity extends AppCompatActivity {
     EditText rmb;
     TextView show;
     private final String TAG="Rate";
-    private float dollarRate=0.1f;
-    private float euroRate=0.2f;
-    private float wonRate=0.3f;
+    private float dollarRate=0.0f;
+    private float euroRate=0.0f;
+    private float wonRate=0.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,19 @@ public class RateActivity extends AppCompatActivity {
 
         rmb=(EditText)findViewById(R.id.rmb);
         show=(TextView)findViewById(R.id.showOut);
+
+        //获取SP里保存的数据
+
+        SharedPreferences sharedPreferences=getSharedPreferences("myrate", Activity.MODE_PRIVATE);
+        //也可用此获取数据：SharedPreferences sp= PreferenceManager.getDefaultSharedPreferences(this);
+
+        dollarRate = sharedPreferences.getFloat("dollar_rate",0.0f);
+        euroRate = sharedPreferences.getFloat("euro_rate",0.0f);
+        wonRate = sharedPreferences.getFloat("won_rate",0.0f);
+        Log.i(TAG,"omnCreate:sp dollarRate="+ dollarRate) ;
+        Log.i(TAG,"omnCreate:sp euroRate="+ euroRate) ;
+        Log.i(TAG,"omnCreate:sp wonRate="+ wonRate) ;
+
     }
     public void onClick(View btn){
         String str=rmb.getText().toString();
@@ -107,6 +122,15 @@ public class RateActivity extends AppCompatActivity {
             Log.i(TAG,"onActivityResult:dollar="+dollarRate);
             Log.i(TAG,"onActivityResult:euro="+euroRate);
             Log.i(TAG,"onActivityResult:won="+wonRate);
+
+            //将新设置的汇率写到SP里
+            SharedPreferences sharedPreferences=getSharedPreferences("myrate", Activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putFloat("dollar_rate",dollarRate);
+            editor.putFloat("euro_rate",euroRate);
+            editor.putFloat("won_rate",wonRate);
+            editor.commit();
+            Log.i(TAG,"onActivityResult:数据已保存到sharedPreferences");
 
         }
         super.onActivityResult(requestCode,resultCode,data);
