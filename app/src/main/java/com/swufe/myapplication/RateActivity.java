@@ -199,6 +199,7 @@ public class RateActivity extends AppCompatActivity implements Runnable {
             int rsz = in.read(buffer, 0, buffer.length);
             if (rsz < 0)
                 break;
+
                 out.append(buffer, 0, rsz);
 
 
