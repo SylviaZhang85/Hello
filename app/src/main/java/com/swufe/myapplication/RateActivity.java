@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,9 +17,10 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RateActivity extends AppCompatActivity {
+public class RateActivity extends AppCompatActivity implements Runnable {
     EditText rmb;
     TextView show;
+    Handler handler;
     private final String TAG="Rate";
     private float dollarRate=0.0f;
     private float euroRate=0.0f;
@@ -42,7 +45,20 @@ public class RateActivity extends AppCompatActivity {
         Log.i(TAG,"omnCreate:sp dollarRate="+ dollarRate) ;
         Log.i(TAG,"omnCreate:sp euroRate="+ euroRate) ;
         Log.i(TAG,"omnCreate:sp wonRate="+ wonRate) ;
+         //开启子线程
+        Thread t=new Thread(this);
+        t.start();
 
+        handler=new Handler(){
+            public void handleMessage(Message msg){
+                if (msg.what==5){
+                    String str = (String)msg.obj;
+                    Log.i(TAG,"handleMessage:getMessage msg="+str);
+                    show.setText(str);
+                }
+                super.handleMessage(msg);
+            }
+        };
     }
     public void onClick(View btn){
         String str=rmb.getText().toString();
@@ -134,5 +150,22 @@ public class RateActivity extends AppCompatActivity {
 
         }
         super.onActivityResult(requestCode,resultCode,data);
+    }
+
+    @Override
+    public void run() {
+        Log.i(TAG,"run:run()......");
+        for(int i=1;i<6;i++){
+            Log.i(TAG,"run:i="+i);
+           try{ Thread.sleep(2000);}
+           catch(InterruptedException e){
+               e.printStackTrace();
+           }
+        }
+        //获取msg对象用于返回主线程
+        Message msg = handler.obtainMessage();
+        msg.what = 5;
+        msg.obj="Hello from run()";
+        handler.sendMessage(msg);
     }
 }
