@@ -1,25 +1,45 @@
 package com.swufe.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-public class SecondActivity extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-    TextView score;
-    TextView scorea;
+public class SecondActivity extends AppCompatActivity {
+private final String TAG="second";
+ TextView score;
+ TextView scorea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+Log.i(TAG,"onCreate:");
 
-        score = (TextView)findViewById(R.id.score);
-        scorea = (TextView)findViewById(R.id.scorea);
+
     }
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        String scorea=((TextView)findViewById(R.id.score)).getText().toString();
+        String scoreb=((TextView)findViewById(R.id.scorea)).getText().toString();;
+        outState.putString("teama_score",scorea);
+        outState.putString("teamb_score",scoreb);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String scorea= savedInstanceState.getString("teama_score");
+        String scoreb= savedInstanceState.getString("teamb_score");
+        Log.i(TAG,"onRestoreInstanceState");
+        ((TextView)findViewById(R.id.score)).setText(scorea);
+        ((TextView)findViewById(R.id.scorea)).setText(scoreb);
+
+    }
+
     public void btnAdd1(View btn){
         if(btn.getId()==R.id.btn_1){
         showScore(3);}
