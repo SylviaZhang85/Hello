@@ -40,7 +40,6 @@ private final String TAG="second";
         ((TextView)findViewById(R.id.scorea)).setText(score2);
 
     }
-
     protected void onStart(){
         super.onStart();
         Log.i(TAG,"onStart:");
