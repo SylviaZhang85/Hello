@@ -1,6 +1,7 @@
 package com.swufe.myapplication;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -158,6 +159,12 @@ public class RateActivity extends AppCompatActivity implements Runnable {
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()==R.id.menu_set){
             openConfig();
+
+        }else if(item.getItemId()==R.id.open_list){
+            Intent list = new Intent(this, RateListActivity.class);
+
+            startActivity(list);
+
 
         }
         return super.onOptionsItemSelected(item);
