@@ -1,28 +1,30 @@
 package com.swufe.myapplication;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.app.Activity;
+        import android.content.Intent;
+        import android.content.SharedPreferences;
+        import android.os.Bundle;
+        import android.os.Handler;
+        import android.os.Message;
+        import android.util.Log;
+        import android.view.Menu;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.widget.EditText;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+        import androidx.annotation.Nullable;
+        import androidx.appcompat.app.AppCompatActivity;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+        import org.jsoup.Jsoup;
+        import org.jsoup.nodes.Document;
+        import org.jsoup.nodes.Element;
+        import org.jsoup.select.Elements;
 
-import java.io.IOException;
+        import java.io.IOException;
+        import java.util.Timer;
+        import java.util.TimerTask;
 
 public class RateActivity extends AppCompatActivity implements Runnable {
     EditText rmb;
@@ -61,30 +63,40 @@ public class RateActivity extends AppCompatActivity implements Runnable {
             public void handleMessage(Message msg){
 
 
-            if (msg.what ==5) {
-                Bundle bdl = (Bundle) msg.obj;
-                dollarRate = bdl.getFloat("dollar-rate");
-                euroRate = bdl.getFloat("euro-rate");
-                wonRate = bdl.getFloat("won-rate");
+                if (msg.what ==5) {
+                    try {
+                        Bundle bdl = (Bundle) msg.obj;
+                        dollarRate = bdl.getFloat("dollar-rate");
+                        euroRate = bdl.getFloat("euro-rate");
+                        wonRate = bdl.getFloat("won-rate");
 
-                Log.i(TAG, "handleMessage:dollarRate" + dollarRate);
-                Log.i(TAG, "handleMessage:euroRate" + euroRate);
-                Log.i(TAG, "handleMessage:wonRate" + wonRate);
+                        Log.i(TAG, "handleMessage:dollarRate" + dollarRate);
+                        Log.i(TAG, "handleMessage:euroRate" + euroRate);
+                        Log.i(TAG, "handleMessage:wonRate" + wonRate);
 
-                Toast.makeText(RateActivity.this, "汇率已更新", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RateActivity.this, "汇率已更新", Toast.LENGTH_SHORT).show();
+                    }catch(NullPointerException e){
+                        e.printStackTrace();}
+                }
+                super.handleMessage(msg);
             }
-            super.handleMessage(msg);
+
+        };
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask1();
+        timer.schedule(timerTask,0,2000);}
+    class TimerTask1 extends TimerTask{
+        @Override
+        public void run() {
+            handler.sendEmptyMessage(5);
         }
-
-    };
-
     }
 
     public void onClick(View btn){
         String str=rmb.getText().toString();
         float r=0;
         if(str.length()>0){
-        r =Float.parseFloat(str);}else
+            r =Float.parseFloat(str);}else
         {
             Toast.makeText(this,"请输入金额",Toast.LENGTH_SHORT).show();
         }
@@ -97,25 +109,25 @@ public class RateActivity extends AppCompatActivity implements Runnable {
             show.setText(String.format("%.2f",r*euroRate));
         }else{
 
-           show.setText(String.format("%.2f",r*wonRate));
+            show.setText(String.format("%.2f",r*wonRate));
         }
 
 
     }
 
-  public void openOne(View btn){
-    Log.i("open;","openOne;");
-      Intent config= new Intent(this,ConfigActivity.class);
-      config.putExtra("dollar_rate_key",dollarRate);
-      config.putExtra("euro_rate_key",euroRate);
-      config.putExtra("won_rate_key",wonRate);
+    public void openOne(View btn){
+        Log.i("open;","openOne;");
+        Intent config= new Intent(this,ConfigActivity.class);
+        config.putExtra("dollar_rate_key",dollarRate);
+        config.putExtra("euro_rate_key",euroRate);
+        config.putExtra("won_rate_key",wonRate);
 
-      Log.i(TAG,"openOne:dollarRate="+dollarRate);
-      Log.i(TAG,"openOne:euroRate="+euroRate);
-      Log.i(TAG,"openOne:wonRate="+wonRate);
+        Log.i(TAG,"openOne:dollarRate="+dollarRate);
+        Log.i(TAG,"openOne:euroRate="+euroRate);
+        Log.i(TAG,"openOne:wonRate="+wonRate);
 
-      startActivity(config);
-      startActivityForResult(config,1);
+        startActivity(config);
+        startActivityForResult(config,1);
 
     }
     public boolean onCreateOptionsMenu(Menu menu){
@@ -150,10 +162,10 @@ public class RateActivity extends AppCompatActivity implements Runnable {
            /* bdl.putFloat("key_dollar",newDollar);
             bdl.putFloat("key_euro",newDollar);
             bdl.putFloat("key_won",newDollar);*/
-           Bundle bundle = data.getExtras();
-           dollarRate= bundle.getFloat("key_dollar",0.1f);
-           euroRate= bundle.getFloat("key_euro",0.1f);
-           wonRate= bundle.getFloat("key_won",0.1f);
+            Bundle bundle = data.getExtras();
+            dollarRate= bundle.getFloat("key_dollar",0.1f);
+            euroRate= bundle.getFloat("key_euro",0.1f);
+            wonRate= bundle.getFloat("key_won",0.1f);
 
             Log.i(TAG,"onActivityResult:dollar="+dollarRate);
             Log.i(TAG,"onActivityResult:euro="+euroRate);
@@ -182,8 +194,8 @@ public class RateActivity extends AppCompatActivity implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }}
-            //用于保存获取的汇率
-           Bundle bundle=new Bundle();
+        //用于保存获取的汇率
+        Bundle bundle=new Bundle();
 
 
         //获取网络数据
@@ -192,7 +204,6 @@ public class RateActivity extends AppCompatActivity implements Runnable {
             url = new URL("http://www.usd-cny.com/bankofchina.htm");
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
             InputStream in = http.getInputStream();
-
             String html = inputStream2String(in);
             Log.i(TAG, "run:html=" + html);
         } catch (MalformedURLException e) {
@@ -253,12 +264,8 @@ public class RateActivity extends AppCompatActivity implements Runnable {
             int rsz = in.read(buffer, 0, buffer.length);
             if (rsz < 0)
                 break;
-
                 out.append(buffer, 0, rsz);
-
-
         }
          return out.toString();
     }*/
 }
-
