@@ -1,7 +1,6 @@
 package com.swufe.myapplication;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -161,7 +160,7 @@ public class RateActivity extends AppCompatActivity implements Runnable {
             openConfig();
 
         }else if(item.getItemId()==R.id.open_list){
-            Intent list = new Intent(this, RateListActivity.class);
+            Intent list = new Intent(this, MyListActivity.class);
 
             startActivity(list);
 
