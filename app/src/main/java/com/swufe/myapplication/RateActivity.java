@@ -88,6 +88,7 @@ public class RateActivity extends AppCompatActivity implements Runnable {
     class TimerTask1 extends TimerTask{
         @Override
         public void run() {
+
             handler.sendEmptyMessage(5);
         }
 
