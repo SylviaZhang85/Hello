@@ -90,6 +90,7 @@ public class RateActivity extends AppCompatActivity implements Runnable {
         public void run() {
 
             handler.sendEmptyMessage(5);
+
         }
 
     }
