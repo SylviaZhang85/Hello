@@ -44,6 +44,7 @@ public class RateCalcActivity extends AppCompatActivity {
                   show.setText(val+"RMB==>"+(100/rate*val));
               }else{
                   show.setText("");
+
               }
             }
         });
