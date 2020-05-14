@@ -1,3 +1,4 @@
+
 package com.swufe.myapplication;
 
 import android.content.Context;
@@ -28,7 +29,6 @@ public class MyAdapter extends ArrayAdapter {
         title.setText("Title:"+map.get("ItemTitle"));
         title.setText("detail:"+map.get("ItemDetail"));
 
-         return itemView;
+        return itemView;
     }
 }
-

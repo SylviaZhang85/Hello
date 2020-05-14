@@ -12,7 +12,7 @@
     tools:context="com.swufe.myapplication.ConfigActivity">
 
     <EditText
-        android:id="@+id/dollar_rate"
+        android:id="@+id/key_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"

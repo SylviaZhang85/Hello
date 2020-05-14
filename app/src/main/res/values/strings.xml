@@ -21,4 +21,6 @@
     <string name="menu_set_label">Setting</string>
     <string name="label_open_list">OpenList</string>
     <string name="rmb_hint_label">input RMB</string>
+    <string name="key">input the key words</string>
+    <string name="save">save</string>
 </resources>

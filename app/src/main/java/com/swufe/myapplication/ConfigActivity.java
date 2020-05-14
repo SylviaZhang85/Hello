@@ -27,7 +27,7 @@ public class ConfigActivity extends AppCompatActivity {
         Log.i(TAG,"onCreate:euro2="+ euro2);
         Log.i(TAG,"onCreate:won2="+ won2);
 
-        dollarText = (EditText)findViewById(R.id.dollar_rate);
+        dollarText = (EditText)findViewById(R.id.key_search);
         euroText = (EditText)findViewById(R.id.euro_rate);
         wonText = (EditText)findViewById(R.id.won_rate);
 
